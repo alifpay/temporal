@@ -1,12 +1,13 @@
 module github.com/alifpay/temporal
 
-go 1.25.4
+go 1.25.6
 
 require (
 	github.com/wagslane/go-rabbitmq v0.15.0
-	go.temporal.io/api v1.54.0
-	go.temporal.io/sdk v1.38.0
-	golang.org/x/sync v0.15.0
+	go.temporal.io/api v1.61.0
+	go.temporal.io/sdk v1.39.0
+	golang.org/x/sync v0.19.0
+	golang.org/x/text v0.33.0
 )
 
 require (
@@ -14,7 +15,6 @@ require (
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
-	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.2 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 // indirect
@@ -24,9 +24,8 @@ require (
 	github.com/robfig/cron v1.2.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
-	golang.org/x/net v0.41.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/net v0.39.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240827150818-7e3bb234dfed // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240827150818-7e3bb234dfed // indirect

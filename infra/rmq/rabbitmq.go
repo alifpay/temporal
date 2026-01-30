@@ -72,6 +72,9 @@ func Close() {
 
 // publish with confirmation
 func Publish(ctx context.Context, routingKey string, body []byte) error {
+	if publisher == nil {
+		return errors.New("rabbitmq publisher is not initialized")
+	}
 	confirms, err := publisher.PublishWithDeferredConfirmWithContext(
 		ctx,
 		body,
@@ -135,6 +138,9 @@ func ConsumePaymentStatus(ctx context.Context) error {
 }
 
 func sendSignal(p models.PaymentStatus) error {
+	if temporalClient == nil {
+		return errors.New("temporal client is not initialized")
+	}
 	err := temporalClient.SignalWorkflow(context.Background(), p.ID, "", models.PaymentStatusSignal, p)
 	if err != nil {
 		return err

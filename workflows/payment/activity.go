@@ -9,10 +9,12 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/alifpay/temporal/infra/rmq"
 	"github.com/alifpay/temporal/models"
+	"golang.org/x/text/encoding/charmap"
 )
 
 //https://nbt.tj/ru/kurs/export_xml_dynamic.php?d1=2025-01-20&d2=2025-01-20&cn=840&cs=USD&export=xml
@@ -65,7 +67,7 @@ func GetUSDRate(ctx context.Context, day time.Time) (float64, error) {
 	decoder := xml.NewDecoder(resp.Body)
 	decoder.CharsetReader = func(charset string, input io.Reader) (io.Reader, error) {
 		if charset == "windows-1251" {
-			return input, nil
+			return charmap.Windows1251.NewDecoder().Reader(input), nil
 		}
 		return nil, fmt.Errorf("unknown charset: %s", charset)
 	}
@@ -79,7 +81,7 @@ func GetUSDRate(ctx context.Context, day time.Time) (float64, error) {
 		return 0, fmt.Errorf("no records found")
 	}
 
-	valStr := valCurs.Records[0].Value
+	valStr := strings.ReplaceAll(valCurs.Records[0].Value, ",", ".")
 	rate, err := strconv.ParseFloat(valStr, 64)
 	if err != nil {
 		return 0, err
